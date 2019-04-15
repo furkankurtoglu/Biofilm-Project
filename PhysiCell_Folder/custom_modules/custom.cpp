@@ -173,7 +173,7 @@ void create_cell_types( void )
 	wound_cell.type = 1; 
 	wound_cell.name = "wound cell"; 
 	wound_cell.parameters.pReference_live_phenotype = &( wound_cell.phenotype );
-	//wound_cell.phenotype.cycle.data.transition_rate(ncycle_Start_i,ncycle_Start_i) = 0.0;
+	wound_cell.phenotype.cycle.data.transition_rate(ncycle_Start_i,ncycle_Start_i) = 0.0;
 	
 	
 	
@@ -203,7 +203,7 @@ void create_cell_types( void )
 	
 	
 	// Setting Secretion Rates for Glucose
-	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= 0.0; // This should be tuned
+	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= 1.0; // This should be tuned
 	wound_cell.phenotype.secretion.secretion_rates[ECM_substate_index]= 0.0;
 	
 	
@@ -236,8 +236,8 @@ void create_cell_types( void )
 	bacterial_cell2.phenotype.geometry.radius = parameters.doubles("bacterial_cell_radius");
 	bacterial_cell2.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_cell_nuclear_radius");
 	bacterial_cell2.phenotype.geometry.surface_area = parameters.doubles("bacterial_cell_surface_area");	
-	
-	
+	bacterial_cell2.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0; 
+	bacterial_cell2.phenotype.secretion.uptake_rates[glucose_substate_index] =0.5; 	
 	
 	// Defining Bacteria
 	bacterial_cell = cell_defaults;
@@ -266,8 +266,9 @@ void create_cell_types( void )
 	bacterial_cell.phenotype.geometry.radius = parameters.doubles("bacterial_cell_radius");
 	bacterial_cell.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_cell_nuclear_radius");
 	bacterial_cell.phenotype.geometry.surface_area = parameters.doubles("bacterial_cell_surface_area");	
- 
-	
+	bacterial_cell.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0;  
+	bacterial_cell.phenotype.secretion.uptake_rates[glucose_substate_index] = 0.5; 	
+
 	return; 
 }
 
@@ -337,11 +338,11 @@ initialize_microenvironment();
 	else
 		{
 			
-		//microenvironment.add_dirichlet_node( n,bc_vector_wound );	
-		microenvironment(n)[2] = 1.0; 
+		// microenvironment.add_dirichlet_node( n,bc_vector_wound );	
+		// microenvironment(n)[2] = 1.0; 
 			
 		}
-			//microenvironment(n)[nECM] = 1.0;  
+		//microenvironment(n)[nECM] = 1.0;  
 		
 		
 		
@@ -358,20 +359,30 @@ void setup_tissue( void )
 	// create some cells near the origin
 	
 	Cell* pC;
+	
+	// Wound Cell Seeding
 
-	//for (int i=-240; i<250; i+=20)
+	for (int i=-240; i<250; i+=20)
 	{
 		
 	pC = create_cell(wound_cell); 
-	pC->assign_position( -220  , -230, 0.0 );
-//
-	
-	//pC = create_cell(wound_cell); 
-	//pC->assign_position( i, -240, 0.0 );
-		
-		
-		
+	pC->assign_position( i  , -230, 0.0 );
 	}
+
+	for (int i=-100; i<100; i+=20)
+	{
+		
+	pC = create_cell(bacterial_cell); 
+	pC->assign_position( i  , -220, 0.0 );
+	}
+	
+	for (int i=-100; i<100; i+=20)
+	{
+		
+	pC = create_cell(bacterial_cell2); 
+	pC->assign_position( i  , -210, 0.0 );
+	}
+	
 	
 	return; 
 }
@@ -537,7 +548,7 @@ void make_adjustments(void)
 
 
 
-if( PhysiCell_globals.current_time>60.0)
+/* if( PhysiCell_globals.current_time>60.0)
 	{
 		
 		for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
@@ -553,7 +564,7 @@ if( PhysiCell_globals.current_time>60.0)
 		
 		}
 	}
-
+ */
 	
 }
 /* void start_secretion (void)

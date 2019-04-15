@@ -102,13 +102,13 @@
 
 <bacterial_cell_apoptosis_rate units="1/min" type="double">0.001666667</bacterial_cell_apoptosis_rate>
 
-<bacterial_cell_total_volume units="micron^3" type="double">1</bacterial_cell_total_volume>
+<bacterial_cell_total_volume units="micron^3" type="double">100</bacterial_cell_total_volume>
 
-<bacterial_cell_solid_volume units="micron^3" type="double">0.25</bacterial_cell_solid_volume>
+<bacterial_cell_solid_volume units="micron^3" type="double">25</bacterial_cell_solid_volume>
 
-<bacterial_cell_fluid_volume units="micron^3" type="double">0.75</bacterial_cell_fluid_volume>
+<bacterial_cell_fluid_volume units="micron^3" type="double">75</bacterial_cell_fluid_volume>
 
-<bacterial_cell_fluid_fraction units="dimensionless" type="double">0.75</bacterial_cell_fluid_fraction>
+<bacterial_cell_fluid_fraction units="dimensionless" type="double">75</bacterial_cell_fluid_fraction>
 
 <bacterial_cell_nuclear units="micron^3" type="double">0.00</bacterial_cell_nuclear>
 
@@ -116,35 +116,35 @@
 
 <bacterial_cell_nuclear_solid units="micron^3" type="double">0.00</bacterial_cell_nuclear_solid>
 
-<bacterial_cell_cytoplasmic units="micron^3" type="double">1.00</bacterial_cell_cytoplasmic>
+<bacterial_cell_cytoplasmic units="micron^3" type="double">100</bacterial_cell_cytoplasmic>
 
-<bacterial_cell_cytoplasmic_fluid units="micron^3" type="double">0.75</bacterial_cell_cytoplasmic_fluid>
+<bacterial_cell_cytoplasmic_fluid units="micron^3" type="double">75</bacterial_cell_cytoplasmic_fluid>
 
-<bacterial_cell_cytoplasmic_solid units="micron^3" type="double">0.25</bacterial_cell_cytoplasmic_solid>
+<bacterial_cell_cytoplasmic_solid units="micron^3" type="double">25</bacterial_cell_cytoplasmic_solid>
 
 <bacterial_cell_cytoplasmic units="micron^3" type="double">0.00</bacterial_cell_cytoplasmic>
 
 <bacterial_cell_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_cytoplasmic_to_nuclear_ratio>
 
-<bacterial_cell_target_solid_cytoplasmic units="micron^3" type="double">0.25</bacterial_cell_target_solid_cytoplasmic>
+<bacterial_cell_target_solid_cytoplasmic units="micron^3" type="double">25</bacterial_cell_target_solid_cytoplasmic>
 
 <bacterial_cell_target_solid_nuclear units="micron^3" type="double">0.00</bacterial_cell_target_solid_nuclear>
 
-<bacterial_cell_target_fluid_fraction units="micron^3" type="double">0.75</bacterial_cell_target_fluid_fraction>
+<bacterial_cell_target_fluid_fraction units="micron^3" type="double">75</bacterial_cell_target_fluid_fraction>
 
 <bacterial_cell_target_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_target_cytoplasmic_to_nuclear_ratio>
 
-<bacterial_cell_cytoplasmic_biomass_change_rate units="1/micron^3" type="double">0.15</bacterial_cell_cytoplasmic_biomass_change_rate>
+<bacterial_cell_cytoplasmic_biomass_change_rate units="1/micron^3" type="double">15</bacterial_cell_cytoplasmic_biomass_change_rate>
 
-<bacterial_cell_fluid_change_rate units="micron^3/min" type="double">0.15</bacterial_cell_fluid_change_rate>
+<bacterial_cell_fluid_change_rate units="micron^3/min" type="double">15</bacterial_cell_fluid_change_rate>
 
 <bacterial_cell_nuclear_biomass_change_rate units="micron^3/min" type="double">0.00</bacterial_cell_nuclear_biomass_change_rate>
 
-<bacterial_cell_radius units="micron" type="double">0.6203505</bacterial_cell_radius>
+<bacterial_cell_radius units="micron" type="double">2.88</bacterial_cell_radius>
 
 <bacterial_cell_nuclear_radius units="micron" type="double">0.00</bacterial_cell_nuclear_radius>
 
-<bacterial_cell_surface_area units="micron^2" type="double">4.835</bacterial_cell_surface_area>
+<bacterial_cell_surface_area units="micron^2" type="double">104.188</bacterial_cell_surface_area>
 
 <bacterial_cell_motility_boolean units="micron^3" type="bool">false</bacterial_cell_motility_boolean>
 
