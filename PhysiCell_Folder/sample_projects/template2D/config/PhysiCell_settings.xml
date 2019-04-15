@@ -1,153 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-/*
-###############################################################################
-# If you use PhysiCell in your project, please cite PhysiCell and the version #
-# number, such as below:                                                      #
-#                                                                             #
-# We implemented and solved the model using PhysiCell (Version x.y.z) [1].    #
-#                                                                             #
-# [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
-#     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
-#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
-#     DOI: 10.1371/journal.pcbi.1005991                                       #
-#                                                                             #
-# See VERSION.txt or call get_PhysiCell_version() to get the current version  #
-#     x.y.z. Call display_citations() to get detailed information on all cite-#
-#     able software used in your PhysiCell application.                       #
-#                                                                             #
-# Because PhysiCell extensively uses BioFVM, we suggest you also cite BioFVM  #
-#     as below:                                                               #
-#                                                                             #
-# We implemented and solved the model using PhysiCell (Version x.y.z) [1],    #
-# with BioFVM [2] to solve the transport equations.                           #
-#                                                                             #
-# [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
-#     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
-#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
-#     DOI: 10.1371/journal.pcbi.1005991                                       #
-#                                                                             #
-# [2] A Ghaffarizadeh, SH Friedman, and P Macklin, BioFVM: an efficient para- #
-#     llelized diffusive transport solver for 3-D biological simulations,     #
-#     Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730  #
-#                                                                             #
-###############################################################################
-#                                                                             #
-# BSD 3-Clause License (see https://opensource.org/licenses/BSD-3-Clause)     #
-#                                                                             #
-# Copyright (c) 2015-2018, Paul Macklin and the PhysiCell Project             #
-# All rights reserved.                                                        #
-#                                                                             #
-# Redistribution and use in source and binary forms, with or without          #
-# modification, are permitted provided that the following conditions are met: #
-#                                                                             #
-# 1. Redistributions of source code must retain the above copyright notice,   #
-# this list of conditions and the following disclaimer.                       #
-#                                                                             #
-# 2. Redistributions in binary form must reproduce the above copyright        #
-# notice, this list of conditions and the following disclaimer in the         #
-# documentation and/or other materials provided with the distribution.        #
-#                                                                             #
-# 3. Neither the name of the copyright holder nor the names of its            #
-# contributors may be used to endorse or promote products derived from this   #
-# software without specific prior written permission.                         #
-#                                                                             #
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" #
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE   #
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE  #
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   #
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         #
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF        #
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    #
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN     #
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)     #
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE  #
-# POSSIBILITY OF SUCH DAMAGE.                                                 #
-#                                                                             #
-###############################################################################
-*/
---> 
 
-<!--
-<user_details />
--->
+<!-- /* ############################################################################### # If you use PhysiCell in your project, please cite PhysiCell and the version # # number, such as below: # # # # We implemented and solved the model using PhysiCell (Version x.y.z) [1]. # # # # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, # # PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu- # # lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018 # # DOI: 10.1371/journal.pcbi.1005991 # # # # See VERSION.txt or call get_PhysiCell_version() to get the current version # # x.y.z. Call display_citations() to get detailed information on all cite-# # able software used in your PhysiCell application. # # # # Because PhysiCell extensively uses BioFVM, we suggest you also cite BioFVM # # as below: # # # # We implemented and solved the model using PhysiCell (Version x.y.z) [1], # # with BioFVM [2] to solve the transport equations. # # # # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, # # PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu- # # lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018 # # DOI: 10.1371/journal.pcbi.1005991 # # # # [2] A Ghaffarizadeh, SH Friedman, and P Macklin, BioFVM: an efficient para- # # llelized diffusive transport solver for 3-D biological simulations, # # Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730 # # # ############################################################################### # # # BSD 3-Clause License (see https://opensource.org/licenses/BSD-3-Clause) # # # # Copyright (c) 2015-2018, Paul Macklin and the PhysiCell Project # # All rights reserved. # # # # Redistribution and use in source and binary forms, with or without # # modification, are permitted provided that the following conditions are met: # # # # 1. Redistributions of source code must retain the above copyright notice, # # this list of conditions and the following disclaimer. # # # # 2. Redistributions in binary form must reproduce the above copyright # # notice, this list of conditions and the following disclaimer in the # # documentation and/or other materials provided with the distribution. # # # # 3. Neither the name of the copyright holder nor the names of its # # contributors may be used to endorse or promote products derived from this # # software without specific prior written permission. # # # # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" # # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE # # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE # # ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE # # LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR # # CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF # # SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS # # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN # # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) # # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE # # POSSIBILITY OF SUCH DAMAGE. # # # ############################################################################### */ -->
 
-<PhysiCell_settings version="devel-version">
-	<domain>
-		<x_min>-500</x_min>
-		<x_max>500</x_max>
-		<y_min>-500</y_min>
-		<y_max>500</y_max>
-		<z_min>-10</z_min>
-		<z_max>10</z_max>
-		<dx>20</dx>
-		<dy>20</dy>
-		<dz>20</dz>
-		<use_2D>true</use_2D>
-	</domain>
-	
-	<overall>
-		<max_time units="min">7200</max_time> <!-- 5 days * 24 h * 60 min -->
-		<time_units>min</time_units>
-		<space_units>micron</space_units>
-	</overall>
-	
-	<parallel>
-		<omp_num_threads>4</omp_num_threads>
-	</parallel> 
-	
-	<save>
-		<folder>output</folder> <!-- use . for root --> 
+<!-- <user_details /> -->
 
-		<full_data>
-			<interval units="min">360</interval>
-			<enable>true</enable>
-		</full_data>
-		
-		<SVG>
-			<interval units="min">60</interval>
-			<enable>true</enable>
-		</SVG>
-		
-		<legacy_data>
-			<enable>false</enable>
-		</legacy_data>
-	</save>
-	
-	<user_parameters>
-		<random_seed type="int" units="dimensionless">0</random_seed> 
-		<!-- example parameters from the template --> 
-		
-		<!-- motile cell type parameters --> 
-		<bacterial_cell_transition_rate type="double" units="1/min">0.01666667</bacterial_cell_transition_rate>
-		<bacterial_cell_apoptosis_rate type="double" units="1/min">0.001666667</bacterial_cell_apoptosis_rate> 
-		<bacterial_cell_total_volume type="double" units="micron^3">1</bacterial_cell_total_volume>
-		<bacterial_cell_solid_volume type="double" units="micron^3">0.25</bacterial_cell_solid_volume> 
-		<bacterial_cell_fluid_volume type="double" units="micron^3">0.75</bacterial_cell_fluid_volume>
-		<bacterial_cell_fluid_fraction type="double" units="dimensionless">0.75</bacterial_cell_fluid_fraction>
-		<bacterial_cell_nuclear type="double" units="micron^3">0.00</bacterial_cell_nuclear>
-		<bacterial_cell_nuclear_fluid type="double" units="micron^3">0.00</bacterial_cell_nuclear_fluid>
-		<bacterial_cell_nuclear_solid type="double" units="micron^3">0.00</bacterial_cell_nuclear_solid>
-		<bacterial_cell_cytoplasmic type="double" units="micron^3">1.00</bacterial_cell_cytoplasmic>
-		<bacterial_cell_cytoplasmic_fluid type="double" units="micron^3">0.75</bacterial_cell_cytoplasmic_fluid>
-		<bacterial_cell_cytoplasmic_solid type="double" units="micron^3">0.25</bacterial_cell_cytoplasmic_solid>
-		<bacterial_cell_cytoplasmic type="double" units="micron^3">0.00</bacterial_cell_cytoplasmic>
-		<bacterial_cell_cytoplasmic_to_nuclear_ratio type="double" units="dimensionless">1e99</bacterial_cell_cytoplasmic_to_nuclear_ratio>
-		<bacterial_cell_target_solid_cytoplasmic type="double" units="micron^3">0.25</bacterial_cell_target_solid_cytoplasmic>
-		<bacterial_cell_target_solid_nuclear type="double" units="micron^3">0.00</bacterial_cell_target_solid_nuclear>
-		<bacterial_cell_target_fluid_fraction type="double" units="micron^3">0.75</bacterial_cell_target_fluid_fraction>
-		<bacterial_cell_target_cytoplasmic_to_nuclear_ratio type="double" units="dimensionless">1e99</bacterial_cell_target_cytoplasmic_to_nuclear_ratio>
-		<bacterial_cell_cytoplasmic_biomass_change_rate type="double" units="1/micron^3">0.15</bacterial_cell_cytoplasmic_biomass_change_rate>
-		<bacterial_cell_fluid_change_rate type="double" units="micron^3/min">0.15</bacterial_cell_fluid_change_rate>
-		<bacterial_cell_nuclear_biomass_change_rate type="double" units="micron^3/min">0.00</bacterial_cell_nuclear_biomass_change_rate>
-		<bacterial_cell_radius type="double" units="micron">0.6203505</bacterial_cell_radius>
-		<bacterial_cell_nuclear_radius type="double" units="micron">0.00</bacterial_cell_nuclear_radius>
-		<bacterial_cell_surface_area type="double" units="micron^2">4.835</bacterial_cell_surface_area>
-		<bacterial_cell_motility_boolean type="bool" units="micron^3">false</bacterial_cell_motility_boolean>
-		<bacterial_cell_migration_speed type="double" units="micron/min">0.00</bacterial_cell_migration_speed>
-		<bacterial_cell_migration_bias type="double" units="dimensionless">0.00</bacterial_cell_migration_bias>
-		
-	</user_parameters>
-	
-	
+-<PhysiCell_settings version="devel-version">
+
+
+-<domain>
+
+<x_min>-250</x_min>
+
+<x_max>250</x_max>
+
+<y_min>-250</y_min>
+
+<y_max>250</y_max>
+
+<z_min>-10</z_min>
+
+<z_max>10</z_max>
+
+<dx>20</dx>
+
+<dy>20</dy>
+
+<dz>20 </dz>
+
+<use_2D>true</use_2D>
+
+</domain>
+
+
+-<overall>
+
+<max_time units="min">2000</max_time>
+
+<!-- 5 days * 24 h * 60 min -->
+
+
+<time_units>min</time_units>
+
+<space_units>micron</space_units>
+
+</overall>
+
+
+-<parallel>
+
+<omp_num_threads>4</omp_num_threads>
+
+</parallel>
+
+
+-<save>
+
+<folder>output</folder>
+
+<!-- use . for root -->
+
+
+
+-<full_data>
+
+<interval units="min">60</interval>
+
+<enable>true</enable>
+
+</full_data>
+
+
+-<SVG>
+
+<interval units="min">60</interval>
+
+<enable>true</enable>
+
+</SVG>
+
+
+-<legacy_data>
+
+<enable>false</enable>
+
+</legacy_data>
+
+</save>
+
+
+-<user_parameters>
+
+<random_seed units="dimensionless" type="int">0</random_seed>
+
+<!-- example parameters from the template -->
+
+
+<!-- motile cell type parameters -->
+
+
+<bacterial_cell_transition_rate units="1/min" type="double">0.01666667</bacterial_cell_transition_rate>
+
+<bacterial_cell_apoptosis_rate units="1/min" type="double">0.001666667</bacterial_cell_apoptosis_rate>
+
+<bacterial_cell_total_volume units="micron^3" type="double">1</bacterial_cell_total_volume>
+
+<bacterial_cell_solid_volume units="micron^3" type="double">0.25</bacterial_cell_solid_volume>
+
+<bacterial_cell_fluid_volume units="micron^3" type="double">0.75</bacterial_cell_fluid_volume>
+
+<bacterial_cell_fluid_fraction units="dimensionless" type="double">0.75</bacterial_cell_fluid_fraction>
+
+<bacterial_cell_nuclear units="micron^3" type="double">0.00</bacterial_cell_nuclear>
+
+<bacterial_cell_nuclear_fluid units="micron^3" type="double">0.00</bacterial_cell_nuclear_fluid>
+
+<bacterial_cell_nuclear_solid units="micron^3" type="double">0.00</bacterial_cell_nuclear_solid>
+
+<bacterial_cell_cytoplasmic units="micron^3" type="double">1.00</bacterial_cell_cytoplasmic>
+
+<bacterial_cell_cytoplasmic_fluid units="micron^3" type="double">0.75</bacterial_cell_cytoplasmic_fluid>
+
+<bacterial_cell_cytoplasmic_solid units="micron^3" type="double">0.25</bacterial_cell_cytoplasmic_solid>
+
+<bacterial_cell_cytoplasmic units="micron^3" type="double">0.00</bacterial_cell_cytoplasmic>
+
+<bacterial_cell_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_cytoplasmic_to_nuclear_ratio>
+
+<bacterial_cell_target_solid_cytoplasmic units="micron^3" type="double">0.25</bacterial_cell_target_solid_cytoplasmic>
+
+<bacterial_cell_target_solid_nuclear units="micron^3" type="double">0.00</bacterial_cell_target_solid_nuclear>
+
+<bacterial_cell_target_fluid_fraction units="micron^3" type="double">0.75</bacterial_cell_target_fluid_fraction>
+
+<bacterial_cell_target_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_target_cytoplasmic_to_nuclear_ratio>
+
+<bacterial_cell_cytoplasmic_biomass_change_rate units="1/micron^3" type="double">0.15</bacterial_cell_cytoplasmic_biomass_change_rate>
+
+<bacterial_cell_fluid_change_rate units="micron^3/min" type="double">0.15</bacterial_cell_fluid_change_rate>
+
+<bacterial_cell_nuclear_biomass_change_rate units="micron^3/min" type="double">0.00</bacterial_cell_nuclear_biomass_change_rate>
+
+<bacterial_cell_radius units="micron" type="double">0.6203505</bacterial_cell_radius>
+
+<bacterial_cell_nuclear_radius units="micron" type="double">0.00</bacterial_cell_nuclear_radius>
+
+<bacterial_cell_surface_area units="micron^2" type="double">4.835</bacterial_cell_surface_area>
+
+<bacterial_cell_motility_boolean units="micron^3" type="bool">false</bacterial_cell_motility_boolean>
+
+<bacterial_cell_migration_speed units="micron/min" type="double">0.00</bacterial_cell_migration_speed>
+
+<bacterial_cell_migration_bias units="dimensionless" type="double">0.00</bacterial_cell_migration_bias>
+
+<dx type="double">20</dx>
+
+</user_parameters>
+
 </PhysiCell_settings>
