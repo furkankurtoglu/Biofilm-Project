@@ -69,7 +69,9 @@
 
 // declare cell definitions here 
 
-Cell_Definition motile_cell; 
+Cell_Definition wound_cell; 
+Cell_Definition biofilm_cell;
+
 
 void create_cell_types( void )
 {
@@ -88,80 +90,142 @@ void create_cell_types( void )
 	// Name the default cell type 
 	
 	cell_defaults.type = 0; 
-	cell_defaults.name = "tumor cell"; 
+	cell_defaults.name = "default cell"; 
 	
-	// set default cell cycle model 
+	// Setting Cell Cycle 
+	cell_defaults.functions.cycle_model = live; 
+	int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+	int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
+	int ncycle_Start_i = live.find_phase_index( PhysiCell_constants::live );
+	int ncycle_End_i = live.find_phase_index( PhysiCell_constants::live );
 
-	cell_defaults.functions.cycle_model = flow_cytometry_separated_cycle_model; 
+		// No Proliferation, Apoptosis, and Necrosis
+	cell_defaults.phenotype.death.rates[necrosis_model_index] = 0.0; 
+	cell_defaults.phenotype.cycle.data.transition_rate(ncycle_Start_i,ncycle_End_i) = 0.0;
+	cell_defaults.phenotype.death.rates[apoptosis_model_index] = 0.0;
+
+
+	// No phenotype change; 
+	cell_defaults.functions.update_phenotype = NULL; 
+
 	
-	// set default_cell_functions; 
-	
-	cell_defaults.functions.update_phenotype = update_cell_and_death_parameters_O2_based; 
-	
-	// needed for a 2-D simulation: 
-	
-	/* grab code from heterogeneity */ 
-	
+	// Setting Orientation 
 	cell_defaults.functions.set_orientation = up_orientation; 
 	cell_defaults.phenotype.geometry.polarity = 1.0;
 	cell_defaults.phenotype.motility.restrict_to_2D = true; 
+
 	
-	// make sure the defaults are self-consistent. 
-	
+	// Setting Secretion and Uptake Rates for each metabolites
 	cell_defaults.phenotype.secretion.sync_to_microenvironment( &microenvironment );
 	cell_defaults.phenotype.sync_to_functions( cell_defaults.functions ); 
 
-	// set the rate terms in the default phenotype 
-
-	// first find index for a few key variables. 
-	int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
-	int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
 	int oxygen_substrate_index = microenvironment.find_density_index( "oxygen" ); 
-
-	int G0G1_index = Ki67_advanced.find_phase_index( PhysiCell_constants::G0G1_phase );
-	int S_index = Ki67_advanced.find_phase_index( PhysiCell_constants::S_phase );
-
-	// initially no necrosis 
-	cell_defaults.phenotype.death.rates[necrosis_model_index] = 0.0; 
-
-	// set oxygen uptake / secretion parameters for the default cell type 
-	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 10; 
+	int glucose_substate_index = microenvironment.find_density_index("glucose");
+	int ECM_substate_index = microenvironment.find_density_index("ECM");
+ 
+	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0; 
 	cell_defaults.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0; 
-	cell_defaults.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 38; 
-	
-	// add custom data here, if any 
-	
+	cell_defaults.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0; 
 
-	// Now, let's define another cell type. 
-	// It's best to just copy the default and modify it. 
+	cell_defaults.phenotype.secretion.uptake_rates[glucose_substate_index] = 0; 
+	cell_defaults.phenotype.secretion.secretion_rates[glucose_substate_index] = 0; 
+	cell_defaults.phenotype.secretion.saturation_densities[glucose_substate_index] = 0; 
 	
-	// make this cell type randomly motile, less adhesive, greater survival, 
-	// and less proliferative 
+	cell_defaults.phenotype.secretion.uptake_rates[ECM_substate_index] = 0; 
+	cell_defaults.phenotype.secretion.secretion_rates[ECM_substate_index] = 0; 
+	cell_defaults.phenotype.secretion.saturation_densities[ECM_substate_index] = 0; 
+
+
+	// Setting cell volumes, target volumes, and geometry (radii)
+	cell_defaults.phenotype.volume.total = 0.0;
+	cell_defaults.phenotype.volume.solid = 0.0;
+	cell_defaults.phenotype.volume.fluid = 0.0;
+	cell_defaults.phenotype.volume.fluid_fraction =	0.0;
+	cell_defaults.phenotype.volume.nuclear = 0.0;
+	cell_defaults.phenotype.volume.nuclear_fluid = 0.0;
+	cell_defaults.phenotype.volume.nuclear_solid = 0.0;
+	cell_defaults.phenotype.volume.cytoplasmic = 0.0;
+	cell_defaults.phenotype.volume.cytoplasmic_fluid = 0.0;
+	cell_defaults.phenotype.volume.cytoplasmic_to_nuclear_ratio = 0.0;
+	cell_defaults.phenotype.volume.target_solid_cytoplasmic = 0.0;
+	cell_defaults.phenotype.volume.target_solid_nuclear = 0.0;
+	cell_defaults.phenotype.volume.target_fluid_fraction = 0.0;
+	cell_defaults.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = 0.0;
+	cell_defaults.phenotype.volume.cytoplasmic_biomass_change_rate = 0.0;
+	cell_defaults.phenotype.volume.nuclear_biomass_change_rate = 0.0;
+	cell_defaults.phenotype.volume.fluid_change_rate = 0.0;
+	cell_defaults.phenotype.geometry.radius = 0.0;
+	cell_defaults.phenotype.geometry.nuclear_radius = 0.0;
+	cell_defaults.phenotype.geometry.surface_area = 0.0;
 	
-	motile_cell = cell_defaults; 
-	motile_cell.type = 1; 
-	motile_cell.name = "motile tumor cell"; 
 	
-	// make sure the new cell type has its own reference phenotype
+	// Setting Motility
+	cell_defaults.phenotype.motility.is.motile = false;
+	cell_defaults.phenotype.motility.migration_speed = 0.0;
+	cell_defaults.phenotype.motility.migration_bias = 0.0;
+
+
+	// Defining Wound Cell
+	wound_cell = cell_defaults; 
+	wound_cell.type = 1; 
+	wound_cell.name = "wound cell"; 
 	
-	motile_cell.parameters.pReference_live_phenotype = &( motile_cell.phenotype ); 
+	// Setting cell volumes, target volumes, and geometry (radii)
+	wound_cell.phenotype.volume.total = 4188.8;
+	wound_cell.phenotype.volume.solid = 1256.64;
+	wound_cell.phenotype.volume.fluid = 2932.16;
+	wound_cell.phenotype.volume.fluid_fraction = 0.7;
+	wound_cell.phenotype.volume.nuclear = 1047.2;
+	wound_cell.phenotype.volume.nuclear_fluid = 733.04;
+	wound_cell.phenotype.volume.nuclear_solid = 314.16;
+	wound_cell.phenotype.volume.cytoplasmic = 3141.6;
+	wound_cell.phenotype.volume.cytoplasmic_fluid = 2199.12;
+	wound_cell.phenotype.volume.cytoplasmic_to_nuclear_ratio = 0.75;
+	wound_cell.phenotype.volume.target_solid_cytoplasmic = 942.48;
+	wound_cell.phenotype.volume.target_solid_nuclear = 314.16;
+	wound_cell.phenotype.volume.target_fluid_fraction = 0.7;
+	wound_cell.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = 0.75;
+	wound_cell.phenotype.volume.cytoplasmic_biomass_change_rate = 0.0;
+	wound_cell.phenotype.volume.nuclear_biomass_change_rate = 0.0;
+	wound_cell.phenotype.volume.fluid_change_rate = 0.0;
+	wound_cell.phenotype.geometry.radius = 10;
+	wound_cell.phenotype.geometry.nuclear_radius = 6.3;
+	wound_cell.phenotype.geometry.surface_area = 1256.637;
 	
-	// enable random motility 
-	motile_cell.phenotype.motility.is_motile = true; 
-	motile_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; 
-	motile_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25 micron/minute 
-	motile_cell.phenotype.motility.migration_bias = 0.0;// completely random 
+	// Setting Secretion Rates for Glucose
+	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= 1; // This should be tuned
 	
-	// Set cell-cell adhesion to 5% of other cells 
-	motile_cell.phenotype.mechanics.cell_cell_adhesion_strength *= parameters.doubles( "motile_cell_relative_adhesion" ); // 0.05; 
+	std
 	
-	// Set apoptosis to zero 
-	motile_cell.phenotype.death.rates[apoptosis_model_index] = parameters.doubles( "motile_cell_apoptosis_rate" ); // 0.0; 
+	// Defining Bacteria
+	bacterial_cell = cell_defaults;
+	bacterial_cell.type = 2;
+	bacterial_cell.name = "bacterial cell";
 	
-	// Set proliferation to 10% of other cells. 
-	// Alter the transition rate from G0G1 state to S state
-	motile_cell.phenotype.cycle.data.transition_rate(G0G1_index,S_index) *= 
-		parameters.doubles( "motile_cell_relative_cycle_entry_rate" ); // 0.1; 
+	// Setting cell volumes, target volumes, and geometry (radii)
+	bacterial_cell.phenotype.volume.total = parameters.doubles("bacterial_cell_total_volume");
+	bacterial_cell.phenotype.volume.solid = parameters.doubles("bacterial_cell_solid_volume");
+	bacterial_cell.phenotype.volume.fluid = parameters.doubles("bacterial_cell_fluid_volume");
+	bacterial_cell.phenotype.volume.fluid_fraction = parameters.doubles("bacterial_cell_fluid_fraction");
+	bacterial_cell.phenotype.volume.nuclear = parameters.doubles("bacterial_cell_nuclear");
+	bacterial_cell.phenotype.volume.nuclear_fluid = parameters.doubles("bacterial_cell_nuclear_fluid");
+	bacterial_cell.phenotype.volume.nuclear_solid = parameters.doubles("bacterial_cell_nuclear_solid");
+	bacterial_cell.phenotype.volume.cytoplasmic = parameters.doubles("bacterial_cell_cytoplasmic");
+	bacterial_cell.phenotype.volume.cytoplasmic_fluid = parameters.doubles("bacterial_cell_cytoplasmic_fluid");
+	bacterial_cell.phenotype.volume.cytoplasmic_solid = parameters.doubles("bacterial_cell_cytoplasmic_solid");
+	bacterial_cell.phenotype.volume.cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_cell_cytoplasmic_to_nuclear_ratio");
+	bacterial_cell.phenotype.volume.target_solid_cytoplasmic = parameters.doubles("bacterial_cell_target_solid_cytoplasmic");
+	bacterial_cell.phenotype.volume.target_solid_nuclear = parameters.doubles("bacterial_cell_target_solid_nuclear");
+	bacterial_cell.phenotype.volume.target_fluid_fraction = parameters.doubles("bacterial_cell_target_fluid_fraction");
+	bacterial_cell.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_cell_target_cytoplasmic_to_nuclear_ratio");
+	bacterial_cell.phenotype.volume.cytoplasmic_biomass_change_rate = parameters.doubles("bacterial_cell_cytoplasmic_biomass_change_rate");
+	bacterial_cell.phenotype.volume.nuclear_biomass_change_rate = parameters.doubles("bacterial_cell_nuclear_biomass_change_rate");
+	bacterial_cell.phenotype.volume.fluid_change_rate = parameters.doubles("bacterial_cell_fluid_change_rate");
+	bacterial_cell.phenotype.geometry.radius = parameters.doubles("bacterial_cell_radius");
+	bacterial_cell.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_cell_nuclear_radius");
+	bacterial_cell.phenotype.geometry.surface_area = parameters.doubles("bacterial_cell_surface_area");	
+
+
 	
 	return; 
 }
