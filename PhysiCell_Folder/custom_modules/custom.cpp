@@ -369,20 +369,31 @@ void setup_tissue( void )
 	pC->assign_position( i  , -230, 0.0 );
 	}
 
-	for (int i=-100; i<100; i+=20)
+	for (int i=-100; i<100; i+=5)
 	{
 		
 	pC = create_cell(bacterial_cell); 
-	pC->assign_position( i  , -220, 0.0 );
-	}
-	
-	for (int i=-100; i<100; i+=20)
-	{
-		
-	pC = create_cell(bacterial_cell2); 
 	pC->assign_position( i  , -210, 0.0 );
 	}
 	
+	for (int i=-100; i<100; i+=5)
+	{
+		
+	pC = create_cell(bacterial_cell); 
+	pC->assign_position( i  , -215, 0.0 );
+	}	
+	for (int i=-100; i<100; i+=4)
+	{
+		
+	pC = create_cell(bacterial_cell2); 
+	pC->assign_position( i  , -200, 0.0 );
+	}
+	for (int i=-100; i<100; i+=4)
+	{
+		
+	pC = create_cell(bacterial_cell2); 
+	pC->assign_position( i  , -205, 0.0 );
+	}	
 	
 	return; 
 }
@@ -403,6 +414,13 @@ std::vector<std::string> my_coloring_function( Cell* pCell )
 		 output[0] = "red";
 		 output[2] = "red"; 
 	}
+	
+	if( pCell->type == 3)
+	{
+		 output[0] = "blue";
+		 output[2] = "blue"; 
+	}	
+	
 	return output; 
 }
 
