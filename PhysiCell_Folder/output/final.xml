@@ -11,9 +11,9 @@
 		</software>
 		<citation />
 		<current_time units="min">2000.010000</current_time>
-		<current_runtime units="sec">51.606828</current_runtime>
-		<created>2019-04-16T03:36:54Z</created>
-		<last_modified>2019-04-16T03:36:54Z</last_modified>
+		<current_runtime units="sec">43.672538</current_runtime>
+		<created>2019-04-17T17:43:35Z</created>
+		<last_modified>2019-04-17T17:43:35Z</last_modified>
 	</metadata>
 	<microenvironment>
 		<domain name="microenvironment">
@@ -82,6 +82,15 @@
 							<label index="22" size="3">motility_bias_direction</label>
 							<label index="25" size="1">persistence_time</label>
 							<label index="26" size="1">motility_reserved</label>
+							<label index="27" size="1">energy</label>
+							<label index="28" size="1">energy_creation_rate</label>
+							<label index="29" size="1">energy_use_rate</label>
+							<label index="30" size="1">cycle_energy_threshold</label>
+							<label index="31" size="1">death_energy_threshold</label>
+							<label index="32" size="1">alpha</label>
+							<label index="33" size="1">beta</label>
+							<label index="34" size="1">gamma</label>
+							<label index="35" size="1">rho</label>
 						</labels>
 						<filename>final_cells_physicell.mat</filename>
 					</simplified_data>

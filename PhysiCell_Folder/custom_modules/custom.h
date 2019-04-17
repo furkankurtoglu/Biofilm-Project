@@ -92,6 +92,9 @@ void setup_microenvironment( void );
 std::vector<std::string> my_coloring_function( Cell* );
 
 
+void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt );
+
 void update_Dirichlet_Nodes(void);
+
 
 void make_adjustments(void);
