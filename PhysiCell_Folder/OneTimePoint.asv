@@ -5,7 +5,7 @@ clc
 cd output\
 
 %%
-load('output00000013_microenvironment0.mat');
+load('output000000_microenvironment0.mat');
 XPos = multiscale_microenvironment(1,:);
 YPos = multiscale_microenvironment(2,:);
 Oxygen = multiscale_microenvironment(5,:);
