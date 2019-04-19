@@ -294,9 +294,10 @@ void create_cell_types( void )
 	bacterial_colony2.phenotype.geometry.radius = parameters.doubles("bacterial_colony2_radius");
 	bacterial_colony2.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_colony2_nuclear_radius");
 	bacterial_colony2.phenotype.geometry.surface_area = parameters.doubles("bacterial_colony2_surface_area");	 */
-	bacterial_colony2.phenotype.secretion.secretion_rates[ECM_substate_index] = 0.0;  
-	bacterial_colony2.phenotype.secretion.uptake_rates[glucose_substate_index] = 0.5; 	
-	bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 10; 	
+	bacterial_colony2.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0;  
+	bacterial_colony2.phenotype.secretion.uptake_rates[glucose_substate_index] = 1.0; 	
+	//bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1000; 	
+	bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1000; 	
 	//bacterial_colony2.functions.volume_update_function = anuclear_volume_model;
 	
 	
@@ -398,33 +399,102 @@ void setup_tissue( void )
 	pC->assign_position( i  , -230, 0.0 );
 	pC->is_movable=false;
 	}
-
-	for (int i=-100; i<100; i+=5)
+	
+	char choice='B';
+	
+	switch(choice) {
+      case 'V' :
+         //vertical rows
+	for (int i=-220; i<-100; i+=10)
 	{
 		
 	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -210, 0.0 );
+	pC->assign_position( 10  , i, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( 20  , i, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( 30  , i, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( 40  , i, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( 0 , i, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( -10  , i, 0.0 );
 	}
-	
-	for (int i=-100; i<100; i+=5)
+         break;
+      case 'H' :
+	  //horizontal rows
+
+	for (int i=-100; i<100; i+=10)
 	{
 		
 	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -215, 0.0 );
-	}	
-/* 	for (int i=-100; i<100; i+=4)
-	{
-		
+	pC->assign_position( i  , -210, 0.0 );
 	pC = create_cell(bacterial_colony2); 
 	pC->assign_position( i  , -200, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( i  , -190, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( i  , -180, 0.0 );
 	}
-	for (int i=-100; i<100; i+=4)
+	
+	 break;
+   
+      case 'R' :
+         //random
+		for (int i=-100; i<100; i+=10)
+	{
+		for(int j=-210;j<-170;j+=10)
+		{
+			
+			if(rand()-rand()<1)
+			{pC = create_cell(bacterial_colony);}
+			else
+			{pC = create_cell(bacterial_colony2);}
+			
+			pC->assign_position( i  , j, 0.0 );
+		}
+	
+	
+	}
+      break;
+      
+      default :
+     //box		
+	for (int i=-50; i<50; i+=10)
+	{
+		
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( i  , -220, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( i  , -210, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( i  , -200, 0.0 );
+	pC = create_cell(bacterial_colony); 
+	pC->assign_position( i  , -190, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( i  , -180, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( i  , -170, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( i  , -160, 0.0 );
+	}
+	for (int i=-220; i<-150; i+=10)
 	{
 		
 	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -205, 0.0 );
-	}	
-	 */
+	pC->assign_position( -60  , i, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( -70 , i, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( 50  , i, 0.0 );
+	pC = create_cell(bacterial_colony2); 
+	pC->assign_position( 60  , i, 0.0 );
+	}
+	
+	}
+
+	
 	return; 
 }
 
@@ -493,7 +563,7 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 	double O2 = pCell->nearest_density_vector()[nO2]; 	
 	double Glucose = pCell->nearest_density_vector()[nGlucose]; 	
 	
-	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * (O2/10) * Glucose * pCell->custom_data[nAlpha] +  pCell->custom_data[nBeta] * pCell->custom_data[nA] * Glucose - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2/10)); 
+	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * (O2/10) * Glucose * pCell->custom_data[nAlpha] +  pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2/20)); 
 	
 	//phenotype.secretion.secretion_rates[1] = 1.0; 
 //	phenotype.secretion.uptake_rates[2] =0.5; 		
