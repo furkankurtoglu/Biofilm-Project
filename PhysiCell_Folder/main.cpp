@@ -114,8 +114,7 @@ int main( int argc, char* argv[] )
 	/* Users typically start modifying here. START USERMODS */ 
 	
 	
-	create_cell_types();
-	std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;		
+	create_cell_types();	
 	setup_tissue();
 
 	/* Users typically stop modifying here. END USERMODS */ 
@@ -162,7 +161,6 @@ int main( int argc, char* argv[] )
 	}
 	
 	
-	std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	// main loop 
 	
 	try 

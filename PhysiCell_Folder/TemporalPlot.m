@@ -64,7 +64,7 @@ for i = 1:length(MEMatFiles)
     
     BigTitle = num2str(i/24);
     suptitle(['Time = ',BigTitle,' days']);
-    pause();
+    pause(0.5);
 end
 
 %%

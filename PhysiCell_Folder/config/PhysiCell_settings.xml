@@ -115,6 +115,9 @@
 	</save>
 	
 	<user_parameters>
+	
+	
+		
 
 		<cell_default_necrotic_rate type="double" units="1/min" hidden="false">0.0</cell_default_necrotic_rate>
 		<cell_default_apoptotic_rate type="double" units="1/min" hidden="false">0.0</cell_default_apoptotic_rate>
@@ -136,7 +139,7 @@
 		<cell_default_energy_creation_rate type="double" units="1/min" hidden="false">0.01</cell_default_energy_creation_rate>
 		<cell_default_energy_use_rate type="double" units="mol" hidden="false">0.02</cell_default_energy_use_rate>	
 		<cell_default_cycle_energy_threshold type="double" units="1/min" hidden="false">10.0</cell_default_cycle_energy_threshold>
-		<cell_default_death_energy_threshold type="double" units="1/min" hidden="false">7.0</cell_default_death_energy_threshold>
+		<cell_default_death_energy_threshold type="double" units="1/min" hidden="false">6</cell_default_death_energy_threshold>
 		<cell_default_aplha type="double" units="none" hidden="false">0.0</cell_default_aplha>			
 		<cell_default_beta type="double" units="none" hidden="false">0.0</cell_default_beta>
 		<cell_default_gamma type="double" units="none" hidden="false">0.5</cell_default_gamma>
@@ -152,7 +155,7 @@
 		<anaerobic_cell_alpha type="double" units="none" hidden="false">0.0</anaerobic_cell_alpha>			
 		<anaerobic_cell_beta type="double" units="none" hidden="false">1.0</anaerobic_cell_beta>
 		<anaerobic_cell_gamma type="double" units="none" hidden="false">1.0</anaerobic_cell_gamma>
-		<anaerobic_cell_rho type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_rho>		
+		<anaerobic_cell_rho type="double" units="dimensionless" hidden="false">100.0</anaerobic_cell_rho>		
 		<anaerobic_cell_phi type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_phi>
 		<anaerobic_cell_chi type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_chi>
 		
@@ -172,9 +175,15 @@
 		
 		<seeding_method type="string" units="dimensionless">vertical</seeding_method>
 		
-		<apoptosis_rate type="double" units="1/min" hidden="false">0.001</apoptosis_rate>		
-		<proliferation_rate type="double" units="1/min" hidden="false">0.01</proliferation_rate>
+		<apoptosis_rate type="double" units="1/min" hidden="false">0.01</apoptosis_rate>		
+		<proliferation_rate type="double" units="1/min" hidden="false">1</proliferation_rate>
 		
+		<ECM_diffusion_coeff type="double" units="1/min" hidden="false">0.01</ECM_diffusion_coeff>		
+		<ECM_decay_constant type="double" units="1/min" hidden="false">1</ECM_decay_constant>
+
+		<glucose_diffusion_coeff type="double" units="1/min" hidden="false">1.6e3</glucose_diffusion_coeff>		
+		<glucose_decay_constant type="double" units="1/min" hidden="false">0.00</glucose_decay_constant>
+
 		
 	</user_parameters>
 	

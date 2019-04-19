@@ -646,7 +646,6 @@ void up_orientation( Cell* pCell, Phenotype& phenotype, double dt )
 void initialize_default_cell_definition( void )
 {
 	
-			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	// If the standard models have not yet been created, do so now. 
 	create_standard_cycle_and_death_models();
 		

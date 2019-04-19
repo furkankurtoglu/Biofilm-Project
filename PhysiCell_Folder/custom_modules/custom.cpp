@@ -78,13 +78,11 @@ void create_cell_types( void )
 	// use the same random seed so that future experiments have the 
 	// same initial histogram of oncoprotein, even if threading means 
 	// that future division and other events are still not identical 
-	// for all runs 
-			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
+	// for all runs 	
 	
 	SeedRandom( 0 ); // or specify a seed here 
-			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
-	// housekeeping 
-		std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;		
+	
+	// housekeeping 	
 	initialize_default_cell_definition();
 	
 
@@ -142,7 +140,6 @@ void create_cell_types( void )
 	cell_defaults.phenotype.secretion.saturation_densities[ECM_substate_index] = parameters.doubles("cell_default_ECM_saturation_density");  
 	
 	
-	std::cout<<__LINE__<<std::endl;	
 	
 	// Defining Custom Data
 	cell_defaults.custom_data.add_variable( "energy", "dimensionless" , parameters.doubles("cell_default_inital_energy") ); 
@@ -337,8 +334,8 @@ void setup_microenvironment( void )
 	}
 	
 	// no gradients need for this example 
-	microenvironment.add_density( "ECM", "dimensionless", 0.0 , 0.0 ); 	
-	microenvironment.add_density( "glucose", "dimensionless", 1.6e3, 0.0 ); 
+	microenvironment.add_density( "ECM", "dimensionless", parameters.doubles("ECM_diffusion_coeff") , parameters.doubles("ECM_decay_constant") ); 	
+	microenvironment.add_density( "glucose", "dimensionless",  parameters.doubles("glucose_diffusion_coeff"), parameters.doubles("glucose_decay_constant") ); 
 
 	default_microenvironment_options.calculate_gradients = true; 
 	
@@ -415,48 +412,49 @@ void setup_tissue( void )
 	
 	std::string seeding_method  = parameters.strings("seeding_method");
 	
-	char choice='B';
 	
-	switch(choice) {
-      case 'V' :
+    if (seeding_method == "vertical")
+    {
          //vertical rows
 	for (int i=-220; i<-100; i+=10)
 	{
 		
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( 10  , i, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( 20  , i, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( 30  , i, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( 40  , i, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( 0 , i, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( -10  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( 10  , i, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( 20  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( 30  , i, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( 40  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( 0 , i, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( -10  , i, 0.0 );
+		}
 	}
-         break;
-      case 'H' :
-	  //horizontal rows
 
-	for (int i=-100; i<100; i+=10)
-	{
-		
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -210, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -200, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -190, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -180, 0.0 );
+    else if (seeding_method == "horizontal")
+    {
+		// horizontal
+		for (int i=-100; i<100; i+=10)
+		{
+			
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -210, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( i  , -200, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -190, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( i  , -180, 0.0 );
+		}
 	}
 	
-	 break;
-   
-      case 'R' :
-         //random
+	
+	else if (seeding_method == "random")
+    {
+	     //random
 		for (int i=-100; i<100; i+=10)
 	{
 		for(int j=-210;j<-170;j+=10)
@@ -472,44 +470,46 @@ void setup_tissue( void )
 	
 	
 	}
-      break;
-      
-      default :
+	}
+	
+	
+	else
+    {
      //box		
-	for (int i=-50; i<50; i+=10)
-	{
-		
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -220, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -210, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -200, 0.0 );
-	pC = create_cell(bacterial_colony); 
-	pC->assign_position( i  , -190, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -180, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -170, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( i  , -160, 0.0 );
-	}
-	for (int i=-220; i<-150; i+=10)
-	{
-		
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( -60  , i, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( -70 , i, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( 50  , i, 0.0 );
-	pC = create_cell(bacterial_colony2); 
-	pC->assign_position( 60  , i, 0.0 );
-	}
+		for (int i=-50; i<50; i+=10)
+		{
+			
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -220, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -210, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -200, 0.0 );
+		pC = create_cell(bacterial_colony); 
+		pC->assign_position( i  , -190, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( i  , -180, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( i  , -170, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( i  , -160, 0.0 );
+		}
+		for (int i=-220; i<-150; i+=10)
+		{
+			
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( -60  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( -70 , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( 50  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( 60  , i, 0.0 );
+		}
 	
 	}
 
-	
+
 	return; 
 }
 
@@ -579,7 +579,7 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 	double O2 = pCell->nearest_density_vector()[nO2]; 	
 	double Glucose = pCell->nearest_density_vector()[nGlucose]; 	
 	
-	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * pCell->custom_data[nPhi] * (O2/10) * Glucose * pCell->custom_data[nAlpha] + pCell->custom_data[nChi] * pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2/20)); 
+	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * pCell->custom_data[nPhi] * (O2) * Glucose * pCell->custom_data[nAlpha] + pCell->custom_data[nChi] * pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2)); 
 	
 	//phenotype.secretion.secretion_rates[1] = 1.0; 
 //	phenotype.secretion.uptake_rates[2] =0.5; 		
@@ -632,7 +632,7 @@ void update_Dirichlet_Nodes(void)
 	{
 		
 		
-		if(  microenvironment.nearest_density_vector( n ) [1] > 0 )
+		if(  microenvironment.nearest_density_vector( n ) [1] > 1 )
 		{	
 		
 		
