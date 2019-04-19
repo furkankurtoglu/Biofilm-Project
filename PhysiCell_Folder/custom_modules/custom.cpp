@@ -431,6 +431,8 @@ void setup_tissue( void )
 		pC->assign_position( 0 , i, 0.0 );
 		pC = create_cell(bacterial_colony); 
 		pC->assign_position( -10  , i, 0.0 );
+		pC = create_cell(bacterial_colony2); 
+		pC->assign_position( -20  , i, 0.0 );
 		}
 	}
 

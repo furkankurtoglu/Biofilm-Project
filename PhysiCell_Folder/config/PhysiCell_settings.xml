@@ -173,7 +173,7 @@
 		<aerobic_glucose_uptake_rate type="double" units="1/min" hidden="false">1.0</aerobic_glucose_uptake_rate>		
 		<aerobic_oxygen_uptake_rate type="double" units="1/min" hidden="false">1000.0</aerobic_oxygen_uptake_rate>		
 		
-		<seeding_method type="string" units="dimensionless">vertical</seeding_method>
+		<seeding_method type="string" units="dimensionless">b</seeding_method>
 		
 		<apoptosis_rate type="double" units="1/min" hidden="false">0.01</apoptosis_rate>		
 		<proliferation_rate type="double" units="1/min" hidden="false">1</proliferation_rate>
