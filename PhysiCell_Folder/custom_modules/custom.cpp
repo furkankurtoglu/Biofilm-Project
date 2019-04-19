@@ -79,16 +79,20 @@ void create_cell_types( void )
 	// same initial histogram of oncoprotein, even if threading means 
 	// that future division and other events are still not identical 
 	// for all runs 
+			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	
-	SeedRandom( parameters.ints("random_seed") ); // or specify a seed here 
-	
+	SeedRandom( 0 ); // or specify a seed here 
+			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	// housekeeping 
-	
+		std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;		
 	initialize_default_cell_definition();
+	
+
+
 	cell_defaults.phenotype.secretion.sync_to_microenvironment( &microenvironment ); 
 	
 	// Name the default cell type 
-	
+
 	cell_defaults.type = 0; 
 	cell_defaults.name = "default cell"; 
 	
@@ -96,16 +100,14 @@ void create_cell_types( void )
 	cell_defaults.functions.cycle_model = live; 
 	int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
 	int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
-	//int ncycle_Start_i = live.find_phase_index( PhysiCell_constants::live );
-	//int ncycle_End_i = live.find_phase_index( PhysiCell_constants::live );
 	int ncycle_Start_i = live.find_phase_index( PhysiCell_constants::live );
+	int ncycle_End_i = live.find_phase_index( PhysiCell_constants::live );
 	
 
-		// No Proliferation, Apoptosis, and Necrosis
-	cell_defaults.phenotype.death.rates[necrosis_model_index] = 0.0; 
-	//cell_defaults.phenotype.cycle.data.transition_rate(ncycle_Start_i,ncycle_End_i) = 0.0;
-	
-	cell_defaults.phenotype.death.rates[apoptosis_model_index] = 0.0;
+	// No Proliferation, Apoptosis, and Necrosis
+	cell_defaults.phenotype.death.rates[necrosis_model_index] = parameters.doubles("cell_default_necrotic_rate"); 
+	cell_defaults.phenotype.cycle.data.transition_rate(ncycle_Start_i,ncycle_End_i) = parameters.doubles("cell_default_transition_rate"); 
+	cell_defaults.phenotype.death.rates[apoptosis_model_index] = parameters.doubles("cell_default_apoptotic_rate");
 
 
 	// No phenotype change; 
@@ -127,30 +129,34 @@ void create_cell_types( void )
 	int ECM_substate_index = microenvironment.find_density_index("ECM");
 	
 	
-	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.0; 
-	cell_defaults.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0; 
-	cell_defaults.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0; 
+	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = parameters.doubles("cell_default_oxygen_uptake_rate"); 
+	cell_defaults.phenotype.secretion.secretion_rates[oxygen_substrate_index] = parameters.doubles("cell_default_oxygen_secretion_rate");
+	cell_defaults.phenotype.secretion.saturation_densities[oxygen_substrate_index] = parameters.doubles("cell_default_oxygen_saturation_density");
 
-	cell_defaults.phenotype.secretion.uptake_rates[glucose_substate_index] = 0; 
-	cell_defaults.phenotype.secretion.secretion_rates[glucose_substate_index] = 1.0; 
-	cell_defaults.phenotype.secretion.saturation_densities[glucose_substate_index] = 10.0; 
+	cell_defaults.phenotype.secretion.uptake_rates[glucose_substate_index] = parameters.doubles("cell_default_glucose_uptake_rate");  
+	cell_defaults.phenotype.secretion.secretion_rates[glucose_substate_index] = parameters.doubles("cell_default_glucose_secretion_rate"); //1.0; 
+	cell_defaults.phenotype.secretion.saturation_densities[glucose_substate_index] = parameters.doubles("cell_default_glucose_saturation_density");// 10.0; 
 	
-	cell_defaults.phenotype.secretion.uptake_rates[ECM_substate_index] = 0; 
-	cell_defaults.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0; 
-	cell_defaults.phenotype.secretion.saturation_densities[ECM_substate_index] = 10.0;   
+	cell_defaults.phenotype.secretion.uptake_rates[ECM_substate_index] = parameters.doubles("cell_default_ECM_uptake_rate");  
+	cell_defaults.phenotype.secretion.secretion_rates[ECM_substate_index] = parameters.doubles("cell_default_ECM_secretion_rate"); 
+	cell_defaults.phenotype.secretion.saturation_densities[ECM_substate_index] = parameters.doubles("cell_default_ECM_saturation_density");  
+	
+	
+	std::cout<<__LINE__<<std::endl;	
 	
 	// Defining Custom Data
-	cell_defaults.custom_data.add_variable( "energy", "dimensionless" , 7.01 ); 
-	cell_defaults.custom_data.add_variable( "energy_creation_rate", "1/min/mmHg" , 0.01 ); 
-	cell_defaults.custom_data.add_variable( "energy_use_rate", "1/min" , 0.02 ); 
-	cell_defaults.custom_data.add_variable( "cycle_energy_threshold", "dimensionless" , 10.0 ); 
-	cell_defaults.custom_data.add_variable( "death_energy_threshold", "dimensionless" , 7.0 );
-	cell_defaults.custom_data.add_variable( "alpha", "none" , 0.0 ); 
-	cell_defaults.custom_data.add_variable( "beta", "none" , 0.0 ); 
-	cell_defaults.custom_data.add_variable( "gamma", "none" , 0.5 );
-	cell_defaults.custom_data.add_variable( "rho", "none" , 0.0 );		
+	cell_defaults.custom_data.add_variable( "energy", "dimensionless" , parameters.doubles("cell_default_inital_energy") ); 
+	cell_defaults.custom_data.add_variable( "energy_creation_rate", "1/min/mmHg" , parameters.doubles("cell_default_energy_creation_rate") ); 
+	cell_defaults.custom_data.add_variable( "energy_use_rate", "1/min" , parameters.doubles("cell_default_energy_use_rate") ); 
+	cell_defaults.custom_data.add_variable( "cycle_energy_threshold", "dimensionless" , parameters.doubles("cell_default_cycle_energy_threshold") ); 
+	cell_defaults.custom_data.add_variable( "death_energy_threshold", "dimensionless" , parameters.doubles("cell_default_death_energy_threshold") );
+	cell_defaults.custom_data.add_variable( "alpha", "none" , parameters.doubles("cell_default_aplha") ); 
+	cell_defaults.custom_data.add_variable( "beta", "none" , parameters.doubles("cell_default_beta") ); 
+	cell_defaults.custom_data.add_variable( "gamma", "none" , parameters.doubles("cell_default_gamma") );
+	cell_defaults.custom_data.add_variable( "rho", "none" , parameters.doubles("cell_default_rho") );		
+	cell_defaults.custom_data.add_variable( "phi", "none" , parameters.doubles("cell_default_phi") );		
+	cell_defaults.custom_data.add_variable( "chi", "none" , parameters.doubles("cell_default_chi") );	 
 	
- 
 	// Setting cell volumes, target volumes, and geometry (radii)
 /* 	cell_defaults.phenotype.volume.total = 0.0;
 	cell_defaults.phenotype.volume.solid = 0.0;
@@ -175,7 +181,7 @@ void create_cell_types( void )
 	 
 	
 	// Setting Motility
-	cell_defaults.phenotype.motility.is_motile = false;
+	cell_defaults.phenotype.motility.is_motile =  parameters.bools("cell_default_motility");
 	//cell_defaults.phenotype.motility.migration_speed = 0.0;
 	//cell_defaults.phenotype.motility.migration_bias = 0.0;
 
@@ -217,8 +223,8 @@ void create_cell_types( void )
 	
 	
 	// Setting Secretion Rates for Glucose
-	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= 0.1; // This should be tuned
-	wound_cell.phenotype.secretion.secretion_rates[ECM_substate_index]= 0.0;
+	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= parameters.doubles("wound_cell_glucose_secretion_rate"); // This should be tuned
+	wound_cell.phenotype.secretion.secretion_rates[ECM_substate_index]= parameters.doubles("wound_cell_ECM_secretion_rate");
 	
 	
 	
@@ -229,10 +235,14 @@ void create_cell_types( void )
 	bacterial_colony.name = "Anaerobic";
 	bacterial_colony.parameters.pReference_live_phenotype = &( bacterial_colony2.phenotype );
 	bacterial_colony.functions.update_phenotype = energy_update_function;
-	bacterial_colony.custom_data["alpha"]=0;
-	bacterial_colony.custom_data["beta"]=1;
-	bacterial_colony.custom_data["gamma"]=1.0; 
-	bacterial_colony.custom_data["rho"]=1.0; //// CHANGE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	bacterial_colony.custom_data["alpha"]=parameters.doubles("anaerobic_cell_alpha");
+	bacterial_colony.custom_data["beta"]=parameters.doubles("anaerobic_cell_beta");
+	bacterial_colony.custom_data["gamma"]=parameters.doubles("anaerobic_cell_gamma"); 
+	bacterial_colony.custom_data["rho"]=parameters.doubles("anaerobic_cell_rho");  //// CHANGE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	bacterial_colony.custom_data["phi"]=parameters.doubles("anaerobic_cell_phi"); 
+	bacterial_colony.custom_data["chi"]=parameters.doubles("anaerobic_cell_chi"); 
+	
+	
 	// Setting cell volumes, target volumes, and geometry (radii)
 /* 	bacterial_colony.phenotype.volume.total = parameters.doubles("bacterial_colony_total_volume");
 	bacterial_colony.phenotype.volume.solid = parameters.doubles("bacterial_colony_solid_volume");
@@ -255,8 +265,8 @@ void create_cell_types( void )
 	bacterial_colony.phenotype.geometry.radius = parameters.doubles("bacterial_colony_radius");
 	bacterial_colony.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_colony_nuclear_radius");
 	bacterial_colony.phenotype.geometry.surface_area = parameters.doubles("bacterial_colony_surface_area");	 */
-	bacterial_colony.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0; 
-	bacterial_colony.phenotype.secretion.uptake_rates[glucose_substate_index] =1.0; 	
+	bacterial_colony.phenotype.secretion.secretion_rates[ECM_substate_index] = parameters.doubles("anaerobic_ECM_secretion_rate"); 
+	bacterial_colony.phenotype.secretion.uptake_rates[glucose_substate_index] = parameters.doubles("anaerobic_glucose_uptake_rate");
 	//bacterial_colony.functions.volume_update_function = anuclear_volume_model;
 	
 	
@@ -268,10 +278,13 @@ void create_cell_types( void )
 	bacterial_colony2.parameters.pReference_live_phenotype = &( bacterial_colony2.phenotype );
 	bacterial_colony2.functions.update_phenotype = energy_update_function;
 
-	bacterial_colony2.custom_data["alpha"]=1;
-	bacterial_colony2.custom_data["beta"]=0;
-	bacterial_colony2.custom_data["gamma"]=1.0; 
-	bacterial_colony2.custom_data["rho"]=0.0; 
+	bacterial_colony2.custom_data["alpha"]=parameters.doubles("aerobic_cell_alpha");
+	bacterial_colony2.custom_data["beta"]=parameters.doubles("aerobic_cell_beta");
+	bacterial_colony2.custom_data["gamma"]=parameters.doubles("anaerobic_cell_gamma");
+	bacterial_colony2.custom_data["rho"]=parameters.doubles("aerobic_cell_rho"); 
+	bacterial_colony2.custom_data["phi"]=parameters.doubles("aerobic_cell_phi"); 
+	bacterial_colony2.custom_data["chi"]=parameters.doubles("aerobic_cell_chi"); 	
+	
 	// Setting cell volumes, target volumes, and geometry (radii)
 /* 	bacterial_colony2.phenotype.volume.total = parameters.doubles("bacterial_colony2_total_volume");
 	bacterial_colony2.phenotype.volume.solid = parameters.doubles("bacterial_colony2_solid_volume");
@@ -294,10 +307,10 @@ void create_cell_types( void )
 	bacterial_colony2.phenotype.geometry.radius = parameters.doubles("bacterial_colony2_radius");
 	bacterial_colony2.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_colony2_nuclear_radius");
 	bacterial_colony2.phenotype.geometry.surface_area = parameters.doubles("bacterial_colony2_surface_area");	 */
-	bacterial_colony2.phenotype.secretion.secretion_rates[ECM_substate_index] = 1.0;  
-	bacterial_colony2.phenotype.secretion.uptake_rates[glucose_substate_index] = 1.0; 	
+	bacterial_colony2.phenotype.secretion.secretion_rates[ECM_substate_index] = parameters.doubles("aerobic_ECM_secretion_rate");  
+	bacterial_colony2.phenotype.secretion.uptake_rates[glucose_substate_index] = parameters.doubles("aerobic_glucose_uptake_rate"); 	
 	//bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1000; 	
-	bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1000; 	
+	bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = parameters.doubles("aerobic_oxygen_uptake_rate"); 	
 	//bacterial_colony2.functions.volume_update_function = anuclear_volume_model;
 	
 	
@@ -399,6 +412,8 @@ void setup_tissue( void )
 	pC->assign_position( i  , -230, 0.0 );
 	pC->is_movable=false;
 	}
+	
+	std::string seeding_method  = parameters.strings("seeding_method");
 	
 	char choice='B';
 	
@@ -557,13 +572,14 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 	static int nBeta = pCell->custom_data.find_variable_index( "beta" ); 
 	static int nGamma = pCell->custom_data.find_variable_index( "gamma" ); 
 	static int nRho = pCell->custom_data.find_variable_index( "rho" );
-	
+	static int nPhi = pCell->custom_data.find_variable_index( "phi" );
+	static int nChi = pCell->custom_data.find_variable_index( "chi" );
 	
 	
 	double O2 = pCell->nearest_density_vector()[nO2]; 	
 	double Glucose = pCell->nearest_density_vector()[nGlucose]; 	
 	
-	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * (O2/10) * Glucose * pCell->custom_data[nAlpha] +  pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2/20)); 
+	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * pCell->custom_data[nPhi] * (O2/10) * Glucose * pCell->custom_data[nAlpha] + pCell->custom_data[nChi] * pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2/20)); 
 	
 	//phenotype.secretion.secretion_rates[1] = 1.0; 
 //	phenotype.secretion.uptake_rates[2] =0.5; 		
@@ -583,14 +599,14 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 	// die if energy is low 
 	if( pCell->custom_data[nE] < pCell->custom_data[nDeath] )
 	{
-		phenotype.death.rates[apoptosis_model_index] = 0.001; 
+		phenotype.death.rates[apoptosis_model_index] = parameters.doubles("apoptosis_rate"); 
 		
 		//return; 
 	}
 
 	if( pCell->custom_data[nE] > pCell->custom_data[nBirth])
 	{
-		phenotype.cycle.data.transition_rate( ncycle_Start_i,ncycle_End_i ) = 0.01; 
+		phenotype.cycle.data.transition_rate( ncycle_Start_i,ncycle_End_i ) = parameters.doubles("proliferation_rate"); 
 		
 		//return; 
 	}

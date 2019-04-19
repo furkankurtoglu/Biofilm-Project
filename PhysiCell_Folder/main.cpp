@@ -101,10 +101,10 @@ int main( int argc, char* argv[] )
 	// time setup 
 	std::string time_units = "min"; 
 
+
 	/* Microenvironment setup */ 
 	
 	setup_microenvironment(); // modify this in the custom code 
-	
 	/* PhysiCell setup */ 
  	
 	// set mechanics voxel size, and match the data structure to BioFVM
@@ -113,8 +113,9 @@ int main( int argc, char* argv[] )
 	
 	/* Users typically start modifying here. START USERMODS */ 
 	
-	create_cell_types();
 	
+	create_cell_types();
+	std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;		
 	setup_tissue();
 
 	/* Users typically stop modifying here. END USERMODS */ 
@@ -160,6 +161,8 @@ int main( int argc, char* argv[] )
 		report_file<<"simulated time\tnum cells\tnum division\tnum death\twall time"<<std::endl;
 	}
 	
+	
+	std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	// main loop 
 	
 	try 

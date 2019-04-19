@@ -1,158 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- /* ############################################################################### # If you use PhysiCell in your project, please cite PhysiCell and the version # # number, such as below: # # # # We implemented and solved the model using PhysiCell (Version x.y.z) [1]. # # # # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, # # PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu- # # lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018 # # DOI: 10.1371/journal.pcbi.1005991 # # # # See VERSION.txt or call get_PhysiCell_version() to get the current version # # x.y.z. Call display_citations() to get detailed information on all cite-# # able software used in your PhysiCell application. # # # # Because PhysiCell extensively uses BioFVM, we suggest you also cite BioFVM # # as below: # # # # We implemented and solved the model using PhysiCell (Version x.y.z) [1], # # with BioFVM [2] to solve the transport equations. # # # # [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, # # PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu- # # lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018 # # DOI: 10.1371/journal.pcbi.1005991 # # # # [2] A Ghaffarizadeh, SH Friedman, and P Macklin, BioFVM: an efficient para- # # llelized diffusive transport solver for 3-D biological simulations, # # Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730 # # # ############################################################################### # # # BSD 3-Clause License (see https://opensource.org/licenses/BSD-3-Clause) # # # # Copyright (c) 2015-2018, Paul Macklin and the PhysiCell Project # # All rights reserved. # # # # Redistribution and use in source and binary forms, with or without # # modification, are permitted provided that the following conditions are met: # # # # 1. Redistributions of source code must retain the above copyright notice, # # this list of conditions and the following disclaimer. # # # # 2. Redistributions in binary form must reproduce the above copyright # # notice, this list of conditions and the following disclaimer in the # # documentation and/or other materials provided with the distribution. # # # # 3. Neither the name of the copyright holder nor the names of its # # contributors may be used to endorse or promote products derived from this # # software without specific prior written permission. # # # # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" # # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE # # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE # # ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE # # LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR # # CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF # # SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS # # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN # # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) # # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE # # POSSIBILITY OF SUCH DAMAGE. # # # ############################################################################### */ -->
-
-<!-- <user_details /> -->
-
--<PhysiCell_settings version="devel-version">
-
-
--<domain>
-
-<x_min>-250</x_min>
-
-<x_max>250</x_max>
-
-<y_min>-250</y_min>
-
-<y_max>250</y_max>
-
-<z_min>-10</z_min>
-
-<z_max>10</z_max>
-
-<dx>20</dx>
-
-<dy>20</dy>
-
-<dz>20 </dz>
-
-<use_2D>true</use_2D>
-
-</domain>
-
-
--<overall>
-
-<max_time units="min">2000</max_time>
-
-<!-- 5 days * 24 h * 60 min -->
-
-
-<time_units>min</time_units>
-
-<space_units>micron</space_units>
-
-</overall>
-
-
--<parallel>
-
-<omp_num_threads>4</omp_num_threads>
-
-</parallel>
-
-
--<save>
-
-<folder>output</folder>
-
-<!-- use . for root -->
-
-
-
--<full_data>
-
-<interval units="min">60</interval>
-
-<enable>true</enable>
-
-</full_data>
-
-
--<SVG>
-
-<interval units="min">60</interval>
-
-<enable>true</enable>
-
-</SVG>
-
-
--<legacy_data>
-
-<enable>false</enable>
-
-</legacy_data>
-
-</save>
-
-
--<user_parameters>
-
-<random_seed units="dimensionless" type="int">0</random_seed>
-
-<!-- example parameters from the template -->
-
-
-<!-- motile cell type parameters -->
-
-
-<bacterial_cell_transition_rate units="1/min" type="double">0.01666667</bacterial_cell_transition_rate>
-
-<bacterial_cell_apoptosis_rate units="1/min" type="double">0.001666667</bacterial_cell_apoptosis_rate>
-
-<bacterial_cell_total_volume units="micron^3" type="double">10</bacterial_cell_total_volume>
-
-<bacterial_cell_solid_volume units="micron^3" type="double">2.5</bacterial_cell_solid_volume>
-
-<bacterial_cell_fluid_volume units="micron^3" type="double">7.5</bacterial_cell_fluid_volume>
-
-<bacterial_cell_fluid_fraction units="dimensionless" type="double">7.5</bacterial_cell_fluid_fraction>
-
-<bacterial_cell_nuclear units="micron^3" type="double">0.00</bacterial_cell_nuclear>
-
-<bacterial_cell_nuclear_fluid units="micron^3" type="double">0.00</bacterial_cell_nuclear_fluid>
-
-<bacterial_cell_nuclear_solid units="micron^3" type="double">0.00</bacterial_cell_nuclear_solid>
-
-<bacterial_cell_cytoplasmic units="micron^3" type="double">10</bacterial_cell_cytoplasmic>
-
-<bacterial_cell_cytoplasmic_fluid units="micron^3" type="double">7.5</bacterial_cell_cytoplasmic_fluid>
-
-<bacterial_cell_cytoplasmic_solid units="micron^3" type="double">2.5</bacterial_cell_cytoplasmic_solid>
-
-<bacterial_cell_cytoplasmic units="micron^3" type="double">0.00</bacterial_cell_cytoplasmic>
-
-<bacterial_cell_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_cytoplasmic_to_nuclear_ratio>
-
-<bacterial_cell_target_solid_cytoplasmic units="micron^3" type="double">2.5</bacterial_cell_target_solid_cytoplasmic>
-
-<bacterial_cell_target_solid_nuclear units="micron^3" type="double">0.00</bacterial_cell_target_solid_nuclear>
-
-<bacterial_cell_target_fluid_fraction units="micron^3" type="double">7.5</bacterial_cell_target_fluid_fraction>
-
-<bacterial_cell_target_cytoplasmic_to_nuclear_ratio units="dimensionless" type="double">1e99</bacterial_cell_target_cytoplasmic_to_nuclear_ratio>
-
-<bacterial_cell_cytoplasmic_biomass_change_rate units="1/micron^3" type="double">1.5</bacterial_cell_cytoplasmic_biomass_change_rate>
-
-<bacterial_cell_fluid_change_rate units="micron^3/min" type="double">1.5</bacterial_cell_fluid_change_rate>
-
-<bacterial_cell_nuclear_biomass_change_rate units="micron^3/min" type="double">0.00</bacterial_cell_nuclear_biomass_change_rate>
-
-<bacterial_cell_radius units="micron" type="double">1.3365</bacterial_cell_radius>
-
-<bacterial_cell_nuclear_radius units="micron" type="double">0.00</bacterial_cell_nuclear_radius>
-
-<bacterial_cell_surface_area units="micron^2" type="double">22.44</bacterial_cell_surface_area>
-
-<bacterial_cell_motility_boolean units="micron^3" type="bool">false</bacterial_cell_motility_boolean>
-
-<bacterial_cell_migration_speed units="micron/min" type="double">0.00</bacterial_cell_migration_speed>
-
-<bacterial_cell_migration_bias units="dimensionless" type="double">0.00</bacterial_cell_migration_bias>
-
-
-</user_parameters>
-
+<!--
+/*
+###############################################################################
+# If you use PhysiCell in your project, please cite PhysiCell and the version #
+# number, such as below:                                                      #
+#                                                                             #
+# We implemented and solved the model using PhysiCell (Version x.y.z) [1].    #
+#                                                                             #
+# [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
+#     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
+#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
+#     DOI: 10.1371/journal.pcbi.1005991                                       #
+#                                                                             #
+# See VERSION.txt or call get_PhysiCell_version() to get the current version  #
+#     x.y.z. Call display_citations() to get detailed information on all cite-#
+#     able software used in your PhysiCell application.                       #
+#                                                                             #
+# Because PhysiCell extensively uses BioFVM, we suggest you also cite BioFVM  #
+#     as below:                                                               #
+#                                                                             #
+# We implemented and solved the model using PhysiCell (Version x.y.z) [1],    #
+# with BioFVM [2] to solve the transport equations.                           #
+#                                                                             #
+# [1] A Ghaffarizadeh, R Heiland, SH Friedman, SM Mumenthaler, and P Macklin, #
+#     PhysiCell: an Open Source Physics-Based Cell Simulator for Multicellu-  #
+#     lar Systems, PLoS Comput. Biol. 14(2): e1005991, 2018                   #
+#     DOI: 10.1371/journal.pcbi.1005991                                       #
+#                                                                             #
+# [2] A Ghaffarizadeh, SH Friedman, and P Macklin, BioFVM: an efficient para- #
+#     llelized diffusive transport solver for 3-D biological simulations,     #
+#     Bioinformatics 32(8): 1256-8, 2016. DOI: 10.1093/bioinformatics/btv730  #
+#                                                                             #
+###############################################################################
+#                                                                             #
+# BSD 3-Clause License (see https://opensource.org/licenses/BSD-3-Clause)     #
+#                                                                             #
+# Copyright (c) 2015-2018, Paul Macklin and the PhysiCell Project             #
+# All rights reserved.                                                        #
+#                                                                             #
+# Redistribution and use in source and binary forms, with or without          #
+# modification, are permitted provided that the following conditions are met: #
+#                                                                             #
+# 1. Redistributions of source code must retain the above copyright notice,   #
+# this list of conditions and the following disclaimer.                       #
+#                                                                             #
+# 2. Redistributions in binary form must reproduce the above copyright        #
+# notice, this list of conditions and the following disclaimer in the         #
+# documentation and/or other materials provided with the distribution.        #
+#                                                                             #
+# 3. Neither the name of the copyright holder nor the names of its            #
+# contributors may be used to endorse or promote products derived from this   #
+# software without specific prior written permission.                         #
+#                                                                             #
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" #
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE   #
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE  #
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   #
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         #
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF        #
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    #
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN     #
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)     #
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE  #
+# POSSIBILITY OF SUCH DAMAGE.                                                 #
+#                                                                             #
+###############################################################################
+*/
+--> 
+
+<!--
+<user_details />
+-->
+
+<PhysiCell_settings version="devel-version">
+	<domain>
+		<x_min>-250</x_min>
+		<x_max>250</x_max>
+		<y_min>-250</y_min>
+		<y_max>250</y_max>
+		<z_min>-10</z_min>
+		<z_max>10</z_max>
+		<dx>20</dx>
+		<dy>20</dy>
+		<dz>20</dz>
+		<use_2D>true</use_2D>
+	</domain>
+	
+	<overall>
+		<max_time units="min">2000</max_time> <!-- 5 days * 24 h * 60 min = 14400 --> 
+		<time_units>min</time_units>
+		<space_units>micron</space_units>
+	</overall>
+	
+	<parallel>
+		<omp_num_threads>10</omp_num_threads>
+	</parallel> 
+	
+	<save>
+		<folder>output</folder> <!-- use . for root --> 
+
+		<full_data>
+			<interval units="min">60</interval>
+			<enable>true</enable>
+		</full_data>
+		
+		<SVG>
+			<interval units="min">60</interval>
+			<enable>true</enable>
+		</SVG>
+		
+		<legacy_data>
+			<enable>false</enable>
+		</legacy_data>
+	</save>
+	
+	<user_parameters>
+
+		<cell_default_necrotic_rate type="double" units="1/min" hidden="false">0.0</cell_default_necrotic_rate>
+		<cell_default_apoptotic_rate type="double" units="1/min" hidden="false">0.0</cell_default_apoptotic_rate>
+		<cell_default_transition_rate type="double" units="1/min" hidden="false">0.0</cell_default_transition_rate>
+		
+		<cell_default_oxygen_uptake_rate type="double" units="1/min" hidden="false">0.0</cell_default_oxygen_uptake_rate>
+		<cell_default_oxygen_secretion_rate type="double" units="1/min" hidden="false">0.0</cell_default_oxygen_secretion_rate>
+		<cell_default_oxygen_saturation_density type="double" units="mmHg" hidden="false">0.0</cell_default_oxygen_saturation_density>
+		
+		<cell_default_glucose_uptake_rate type="double" units="1/min" hidden="false">0.0</cell_default_glucose_uptake_rate>
+		<cell_default_glucose_secretion_rate type="double" units="1/min" hidden="false">1.0</cell_default_glucose_secretion_rate>
+		<cell_default_glucose_saturation_density type="double" units="mol" hidden="false">10.0</cell_default_glucose_saturation_density>
+		
+		<cell_default_ECM_uptake_rate type="double" units="1/min" hidden="false">0.0</cell_default_ECM_uptake_rate>
+		<cell_default_ECM_secretion_rate type="double" units="1/min" hidden="false">1.0</cell_default_ECM_secretion_rate>
+		<cell_default_ECM_saturation_density type="double" units="mol" hidden="false">10.0</cell_default_ECM_saturation_density>		
+		
+		<cell_default_inital_energy type="double" units="1/min" hidden="false">7.01</cell_default_inital_energy>
+		<cell_default_energy_creation_rate type="double" units="1/min" hidden="false">0.01</cell_default_energy_creation_rate>
+		<cell_default_energy_use_rate type="double" units="mol" hidden="false">0.02</cell_default_energy_use_rate>	
+		<cell_default_cycle_energy_threshold type="double" units="1/min" hidden="false">10.0</cell_default_cycle_energy_threshold>
+		<cell_default_death_energy_threshold type="double" units="1/min" hidden="false">7.0</cell_default_death_energy_threshold>
+		<cell_default_aplha type="double" units="none" hidden="false">0.0</cell_default_aplha>			
+		<cell_default_beta type="double" units="none" hidden="false">0.0</cell_default_beta>
+		<cell_default_gamma type="double" units="none" hidden="false">0.5</cell_default_gamma>
+		<cell_default_rho type="double" units="dimensionless" hidden="false">0.0</cell_default_rho>		
+		<cell_default_phi type="double" units="dimensionless" hidden="false">1.0</cell_default_phi>
+		<cell_default_chi type="double" units="dimensionless" hidden="false">1.0</cell_default_chi>
+		
+		<cell_default_motility type="bool" units="none" hidden="false">false</cell_default_motility>
+		
+		<wound_cell_glucose_secretion_rate type="double" units="1/min" hidden="false">0.1</wound_cell_glucose_secretion_rate>
+		<wound_cell_ECM_secretion_rate type="double" units="1/min" hidden="false">0.0</wound_cell_ECM_secretion_rate>
+		
+		<anaerobic_cell_alpha type="double" units="none" hidden="false">0.0</anaerobic_cell_alpha>			
+		<anaerobic_cell_beta type="double" units="none" hidden="false">1.0</anaerobic_cell_beta>
+		<anaerobic_cell_gamma type="double" units="none" hidden="false">1.0</anaerobic_cell_gamma>
+		<anaerobic_cell_rho type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_rho>		
+		<anaerobic_cell_phi type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_phi>
+		<anaerobic_cell_chi type="double" units="dimensionless" hidden="false">1.0</anaerobic_cell_chi>
+		
+		<anaerobic_ECM_secretion_rate type="double" units="1/min" hidden="false">1.0</anaerobic_ECM_secretion_rate>
+		<anaerobic_glucose_uptake_rate type="double" units="1/min" hidden="false">1.0</anaerobic_glucose_uptake_rate>		
+		
+		<aerobic_cell_alpha type="double" units="none" hidden="false">1.0</aerobic_cell_alpha>			
+		<aerobic_cell_beta type="double" units="none" hidden="false">0.0</aerobic_cell_beta>
+		<aerobic_cell_gamma type="double" units="none" hidden="false">1.0</aerobic_cell_gamma>
+		<aerobic_cell_rho type="double" units="dimensionless" hidden="false">1.0</aerobic_cell_rho>		
+		<aerobic_cell_phi type="double" units="dimensionless" hidden="false">1.0</aerobic_cell_phi>
+		<aerobic_cell_chi type="double" units="dimensionless" hidden="false">1.0</aerobic_cell_chi>	
+		
+		<aerobic_ECM_secretion_rate type="double" units="1/min" hidden="false">1.0</aerobic_ECM_secretion_rate>
+		<aerobic_glucose_uptake_rate type="double" units="1/min" hidden="false">1.0</aerobic_glucose_uptake_rate>		
+		<aerobic_oxygen_uptake_rate type="double" units="1/min" hidden="false">1000.0</aerobic_oxygen_uptake_rate>		
+		
+		<seeding_method type="string" units="dimensionless">vertical</seeding_method>
+		
+		<apoptosis_rate type="double" units="1/min" hidden="false">0.001</apoptosis_rate>		
+		<proliferation_rate type="double" units="1/min" hidden="false">0.01</proliferation_rate>
+		
+		
+	</user_parameters>
+	
 </PhysiCell_settings>

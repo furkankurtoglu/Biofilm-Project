@@ -645,6 +645,8 @@ void up_orientation( Cell* pCell, Phenotype& phenotype, double dt )
 
 void initialize_default_cell_definition( void )
 {
+	
+			std::cout<<"HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYY"<<std::endl;	
 	// If the standard models have not yet been created, do so now. 
 	create_standard_cycle_and_death_models();
 		
@@ -652,6 +654,8 @@ void initialize_default_cell_definition( void )
 	cell_defaults.pMicroenvironment = NULL;
 	if( BioFVM::get_default_microenvironment() != NULL )
 	{ cell_defaults.pMicroenvironment = BioFVM::get_default_microenvironment(); }
+
+
 
 	// make sure phenotype.secretions are correctly sized 
 	
