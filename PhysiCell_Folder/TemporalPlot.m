@@ -4,8 +4,7 @@ clc
 
 
 
-cd C:\Users\Furkan\Documents\GitHub\Biofilm-Project\PhysiCell_Folder
-cd output
+cd C:\Users\Aneequa\Desktop\Biofilm-Project\PhysiCell_Folder\output
 
 % 
 % cd C:\Users\Furkan\Desktop\output_100_um_tumor_1e-6_degradation
@@ -63,7 +62,7 @@ for i = 1:length(MEMatFiles)
     
     
     BigTitle = num2str(i/24);
-    suptitle(['Time = ',BigTitle,' days']);
+%    suptitle(['Time = ',BigTitle,' days']);
     pause(0.5);
 end
 

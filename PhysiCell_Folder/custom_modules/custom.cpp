@@ -154,27 +154,6 @@ void create_cell_types( void )
 	cell_defaults.custom_data.add_variable( "phi", "none" , parameters.doubles("cell_default_phi") );		
 	cell_defaults.custom_data.add_variable( "chi", "none" , parameters.doubles("cell_default_chi") );	 
 	
-	// Setting cell volumes, target volumes, and geometry (radii)
-/* 	cell_defaults.phenotype.volume.total = 0.0;
-	cell_defaults.phenotype.volume.solid = 0.0;
-	cell_defaults.phenotype.volume.fluid = 0.0;
-	cell_defaults.phenotype.volume.fluid_fraction =	0.0;
-	cell_defaults.phenotype.volume.nuclear = 0.0;
-	cell_defaults.phenotype.volume.nuclear_fluid = 0.0;
-	cell_defaults.phenotype.volume.nuclear_solid = 0.0;
-	cell_defaults.phenotype.volume.cytoplasmic = 0.0;
-	cell_defaults.phenotype.volume.cytoplasmic_fluid = 0.0;
-	cell_defaults.phenotype.volume.cytoplasmic_to_nuclear_ratio = 0.0;
-	cell_defaults.phenotype.volume.target_solid_cytoplasmic = 0.0;
-	cell_defaults.phenotype.volume.target_solid_nuclear = 0.0;
-	cell_defaults.phenotype.volume.target_fluid_fraction = 0.0;
-	cell_defaults.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = 0.0;
-	cell_defaults.phenotype.volume.cytoplasmic_biomass_change_rate = 0.0;
-	cell_defaults.phenotype.volume.nuclear_biomass_change_rate = 0.0;
-	cell_defaults.phenotype.volume.fluid_change_rate = 0.0;
-	cell_defaults.phenotype.geometry.radius = 0.0;
-	cell_defaults.phenotype.geometry.nuclear_radius = 0.0;
-	cell_defaults.phenotype.geometry.surface_area = 0.0; */
 	 
 	
 	// Setting Motility
@@ -194,30 +173,7 @@ void create_cell_types( void )
 	
 	
 	
-	// Setting cell volumes, target volumes, and geometry (radii)
-/* 	wound_cell.phenotype.volume.total = 4188.8;
-	wound_cell.phenotype.volume.fluid_fraction = 0.7;
-	wound_cell.phenotype.volume.fluid = wound_cell.phenotype.volume.fluid_fraction*wound_cell.phenotype.volume.total;
-	wound_cell.phenotype.volume.solid =wound_cell.phenotype.volume.total-wound_cell.phenotype.volume.fluid;
-	wound_cell.phenotype.volume.cytoplasmic_to_nuclear_ratio = 0.75;
-	wound_cell.phenotype.volume.cytoplasmic = 0.75*wound_cell.phenotype.volume.total;
-	wound_cell.phenotype.volume.nuclear = wound_cell.phenotype.volume.total-wound_cell.phenotype.volume.cytoplasmic;
-	wound_cell.phenotype.volume.nuclear_fluid = 733.04;
-	wound_cell.phenotype.volume.nuclear_solid = 314.16;
-	wound_cell.phenotype.volume.cytoplasmic = 3141.6;
-	wound_cell.phenotype.volume.cytoplasmic_fluid = 2199.12;
-	
-	wound_cell.phenotype.volume.target_solid_cytoplasmic = 942.48;
-	wound_cell.phenotype.volume.target_solid_nuclear = 314.16;
-	wound_cell.phenotype.volume.target_fluid_fraction = 0.7;
-	wound_cell.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = 0.75;
-	wound_cell.phenotype.volume.cytoplasmic_biomass_change_rate = 0.0;
-	wound_cell.phenotype.volume.nuclear_biomass_change_rate = 0.0;
-	wound_cell.phenotype.volume.fluid_change_rate = 0.0;
-	wound_cell.phenotype.geometry.radius = 10;
-	wound_cell.phenotype.geometry.nuclear_radius = 6.3;
-	wound_cell.phenotype.geometry.surface_area = 1256.637; */
-	
+
 	
 	// Setting Secretion Rates for Glucose
 	wound_cell.phenotype.secretion.secretion_rates[glucose_substate_index]= parameters.doubles("wound_cell_glucose_secretion_rate"); // This should be tuned
@@ -240,31 +196,10 @@ void create_cell_types( void )
 	bacterial_colony.custom_data["chi"]=parameters.doubles("anaerobic_cell_chi"); 
 	
 	
-	// Setting cell volumes, target volumes, and geometry (radii)
-/* 	bacterial_colony.phenotype.volume.total = parameters.doubles("bacterial_colony_total_volume");
-	bacterial_colony.phenotype.volume.solid = parameters.doubles("bacterial_colony_solid_volume");
-	bacterial_colony.phenotype.volume.fluid = parameters.doubles("bacterial_colony_fluid_volume");
-	bacterial_colony.phenotype.volume.fluid_fraction = parameters.doubles("bacterial_colony_fluid_fraction");
-	bacterial_colony.phenotype.volume.nuclear = parameters.doubles("bacterial_colony_nuclear");
-	bacterial_colony.phenotype.volume.nuclear_fluid = parameters.doubles("bacterial_colony_nuclear_fluid");
-	bacterial_colony.phenotype.volume.nuclear_solid = parameters.doubles("bacterial_colony_nuclear_solid");
-	bacterial_colony.phenotype.volume.cytoplasmic = parameters.doubles("bacterial_colony_cytoplasmic");
-	bacterial_colony.phenotype.volume.cytoplasmic_fluid = parameters.doubles("bacterial_colony_cytoplasmic_fluid");
-	bacterial_colony.phenotype.volume.cytoplasmic_solid = parameters.doubles("bacterial_colony_cytoplasmic_solid");
-	bacterial_colony.phenotype.volume.cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_colony_cytoplasmic_to_nuclear_ratio");
-	bacterial_colony.phenotype.volume.target_solid_cytoplasmic = parameters.doubles("bacterial_colony_target_solid_cytoplasmic");
-	bacterial_colony.phenotype.volume.target_solid_nuclear = parameters.doubles("bacterial_colony_target_solid_nuclear");
-	bacterial_colony.phenotype.volume.target_fluid_fraction = parameters.doubles("bacterial_colony_target_fluid_fraction");
-	bacterial_colony.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_colony_target_cytoplasmic_to_nuclear_ratio");
-	bacterial_colony.phenotype.volume.cytoplasmic_biomass_change_rate = parameters.doubles("bacterial_colony_cytoplasmic_biomass_change_rate");
-	bacterial_colony.phenotype.volume.nuclear_biomass_change_rate = parameters.doubles("bacterial_colony_nuclear_biomass_change_rate");
-	bacterial_colony.phenotype.volume.fluid_change_rate = parameters.doubles("bacterial_colony_fluid_change_rate");
-	bacterial_colony.phenotype.geometry.radius = parameters.doubles("bacterial_colony_radius");
-	bacterial_colony.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_colony_nuclear_radius");
-	bacterial_colony.phenotype.geometry.surface_area = parameters.doubles("bacterial_colony_surface_area");	 */
+	
 	bacterial_colony.phenotype.secretion.secretion_rates[ECM_substate_index] = parameters.doubles("anaerobic_ECM_secretion_rate"); 
 	bacterial_colony.phenotype.secretion.uptake_rates[glucose_substate_index] = parameters.doubles("anaerobic_glucose_uptake_rate");
-	//bacterial_colony.functions.volume_update_function = anuclear_volume_model;
+
 	
 	
 	
@@ -282,28 +217,7 @@ void create_cell_types( void )
 	bacterial_colony2.custom_data["phi"]=parameters.doubles("aerobic_cell_phi"); 
 	bacterial_colony2.custom_data["chi"]=parameters.doubles("aerobic_cell_chi"); 	
 	
-	// Setting cell volumes, target volumes, and geometry (radii)
-/* 	bacterial_colony2.phenotype.volume.total = parameters.doubles("bacterial_colony2_total_volume");
-	bacterial_colony2.phenotype.volume.solid = parameters.doubles("bacterial_colony2_solid_volume");
-	bacterial_colony2.phenotype.volume.fluid = parameters.doubles("bacterial_colony2_fluid_volume");
-	bacterial_colony2.phenotype.volume.fluid_fraction = parameters.doubles("bacterial_colony2_fluid_fraction");
-	bacterial_colony2.phenotype.volume.nuclear = parameters.doubles("bacterial_colony2_nuclear");
-	bacterial_colony2.phenotype.volume.nuclear_fluid = parameters.doubles("bacterial_colony2_nuclear_fluid");
-	bacterial_colony2.phenotype.volume.nuclear_solid = parameters.doubles("bacterial_colony2_nuclear_solid");
-	bacterial_colony2.phenotype.volume.cytoplasmic = parameters.doubles("bacterial_colony2_cytoplasmic");
-	bacterial_colony2.phenotype.volume.cytoplasmic_fluid = parameters.doubles("bacterial_colony2_cytoplasmic_fluid");
-	bacterial_colony2.phenotype.volume.cytoplasmic_solid = parameters.doubles("bacterial_colony2_cytoplasmic_solid");
-	bacterial_colony2.phenotype.volume.cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_colony2_cytoplasmic_to_nuclear_ratio");
-	bacterial_colony2.phenotype.volume.target_solid_cytoplasmic = parameters.doubles("bacterial_colony2_target_solid_cytoplasmic");
-	bacterial_colony2.phenotype.volume.target_solid_nuclear = parameters.doubles("bacterial_colony2_target_solid_nuclear");
-	bacterial_colony2.phenotype.volume.target_fluid_fraction = parameters.doubles("bacterial_colony2_target_fluid_fraction");
-	bacterial_colony2.phenotype.volume.target_cytoplasmic_to_nuclear_ratio = parameters.doubles("bacterial_colony2_target_cytoplasmic_to_nuclear_ratio");
-	bacterial_colony2.phenotype.volume.cytoplasmic_biomass_change_rate = parameters.doubles("bacterial_colony2_cytoplasmic_biomass_change_rate");
-	bacterial_colony2.phenotype.volume.nuclear_biomass_change_rate = parameters.doubles("bacterial_colony2_nuclear_biomass_change_rate");
-	bacterial_colony2.phenotype.volume.fluid_change_rate = parameters.doubles("bacterial_colony2_fluid_change_rate");
-	bacterial_colony2.phenotype.geometry.radius = parameters.doubles("bacterial_colony2_radius");
-	bacterial_colony2.phenotype.geometry.nuclear_radius = parameters.doubles("bacterial_colony2_nuclear_radius");
-	bacterial_colony2.phenotype.geometry.surface_area = parameters.doubles("bacterial_colony2_surface_area");	 */
+	
 	bacterial_colony2.phenotype.secretion.secretion_rates[ECM_substate_index] = parameters.doubles("aerobic_ECM_secretion_rate");  
 	bacterial_colony2.phenotype.secretion.uptake_rates[glucose_substate_index] = parameters.doubles("aerobic_glucose_uptake_rate"); 	
 	//bacterial_colony2.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1000; 	
@@ -349,14 +263,7 @@ void setup_microenvironment( void )
 	bc_vector_air[1]=0.0;
 	bc_vector_air[2]=0.0;
 	 
-	/* std::vector<double> bc_vector_wound( 3 ); // 5% o2
-	bc_vector_wound[0]=0.0;
-	bc_vector_wound[1]=0.0;
-	bc_vector_wound[2]=100; 
-	 */
-	//default_microenvironment_options.Dirichlet_activation_vector[1] = false;
-	//default_microenvironment_options.Dirichlet_activation_vector[1]
-	//default_microenvironment_options.Dirichlet_condition_vector = bc_vector;
+	
 	
 	// initialize BioFVM 
 
@@ -541,20 +448,7 @@ std::vector<std::string> my_coloring_function( Cell* pCell )
 	return output; 
 }
 
-/* void anuclear_volume_model( Cell* pCell, Phenotype& phenotype , double dt )
-{
 
-	bacterial_colony.phenotype.volume.fluid = bacterial_colony.phenotype.volume.fluid_change_rate * ( bacterial_colony.phenotype.volume.target_fluid_fraction * bacterial_colony.phenotype.volume.total - bacterial_colony.phenotype.volume.fluid) * dt;
-	
-	bacterial_colony.phenotype.volume.cytoplasmic_solid = bacterial_colony.phenotype.volume.cytoplasmic_biomass_change_rate * (bacterial_colony.phenotype.volume.target_solid_cytoplasmic - bacterial_colony.phenotype.volume.cytoplasmic_solid) * dt;
-	
-	bacterial_colony.phenotype.volume.cytoplasmic_fluid = bacterial_colony.phenotype.volume.cytoplasmic_fluid;
-	bacterial_colony.phenotype.volume.solid = bacterial_colony.phenotype.volume.cytoplasmic_solid;
-	bacterial_colony.phenotype.volume.total = bacterial_colony.phenotype.volume.solid + bacterial_colony.phenotype.volume.fluid;
-	
-	return; 
-}
- */
 
 
 void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
@@ -579,13 +473,16 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 	
 	
 	double O2 = pCell->nearest_density_vector()[nO2]; 	
-	double Glucose = pCell->nearest_density_vector()[nGlucose]; 	
+	double Glucose = pCell->nearest_density_vector()[nGlucose]; 
+	if (pCell->type==2)
+	{
+	//std::cout<<pCell->custom_data[nE]<<std::endl;	
+	}
+	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * pCell->custom_data[nPhi] * (O2) * Glucose * pCell->custom_data[nAlpha] + pCell->custom_data[nChi] * pCell->custom_data[nBeta] * pCell->custom_data[nA] * (Glucose*2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2)); 
 	
-	pCell->custom_data[nE] += dt*( pCell->custom_data[nA] * pCell->custom_data[nPhi] * (O2) * Glucose * pCell->custom_data[nAlpha] + pCell->custom_data[nChi] * pCell->custom_data[nBeta] * pCell->custom_data[nA] * (2*Glucose) - pCell->custom_data[nGamma] * pCell->custom_data[nB] - pCell->custom_data[nRho] * (O2)); 
-	
-	//phenotype.secretion.secretion_rates[1] = 1.0; 
-//	phenotype.secretion.uptake_rates[2] =0.5; 		
-	
+	//int a=0;
+	//std::cout<<pCell->custom_data[nE]<<std::endl;
+	//std::cin>>a;
 	
 	static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
 	static int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
@@ -620,7 +517,7 @@ void energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
 
 	
 
-}
+}  
 
 
 
@@ -738,8 +635,11 @@ void update_Dirichlet_Nodes(void)
 		
 }// end of for
 
+
+
+
 	double total=microenvironment.mesh.voxels.size();
-//std::cout<<leaked_glucose(total-dnodes);
+
 	for( int i = 0; i < microenvironment.mesh.voxels.size() ; i++ )
 	{
 		
@@ -757,43 +657,6 @@ void update_Dirichlet_Nodes(void)
 	 
 
 	
-
-
-
-/* if( PhysiCell_globals.current_time>60.0)
-	{
-		
-		for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
-		{			
-			std::vector<double> position = microenvironment.mesh.voxels[n].center;
-
-			if((fabs(position[0])<50&& position[1]<-100&&position[1]>-220))
-				{
-					
-					microenvironment(n)[1] = 1.0;
-					
-				}
-		
-		}
-	} */
-
-	
 }
-/* void start_secretion (void)
 
-{
-	
-	for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
-		{			std::vector<double> position = microenvironment.mesh.voxels[n].center;
 
-				if(position[1]<-220)
-				{
-					
-					microenvironment(n)[2] = 1.0;
-					
-				}
-		
-		}
-	
-	
-} */
