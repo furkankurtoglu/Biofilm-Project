@@ -1,0 +1,8 @@
+*.mat
+/output
+*.svg
+*.jpg
+*.png
+*.gif
+*.o
+*.exe
