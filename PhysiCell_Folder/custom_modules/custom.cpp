@@ -267,7 +267,7 @@ void setup_microenvironment( void )
 	
 	// initialize BioFVM 
 
-initialize_microenvironment(); 	
+	initialize_microenvironment(); 	
 
 	
  	for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
